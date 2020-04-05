@@ -3,8 +3,8 @@ import * as express from 'express';
 import apiRouter from './routes';
 import appConstants from './constants/AppConstants';
 import { createConnection } from "typeorm";
-// import cors = require("cors";
 import * as cors from "cors";
+import { AuthService } from "./services/AuthService";
 
 async function initialize() {
     const app = express();

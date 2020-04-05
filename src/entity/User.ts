@@ -18,30 +18,22 @@ export class User {
     @Column()
     emailId: string;
 
-    password: string;
-
     @Column()
     encryptedPassword: string;
 
     @Column()
     phoneNumber: string;
 
-    @Column({
-        type: "enum",
-        enum: Role,
-        default: Role.USER
-    })
-    role: Role;
+    @Column()
+    role: Role = Role.USER;
 
     @CreateDateColumn()
     createdDate: Date;
 
-    @CreateDateColumn()
+    @UpdateDateColumn()
     updatedDate: Date;
 
-    @BeforeInsert()
-    encryptPassword() {
-        this.encryptedPassword = md5(this.password);
+    encryptPassword(password: String) {
+        this.encryptedPassword = md5(password);
     }
-
 }
