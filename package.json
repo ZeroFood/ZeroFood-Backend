@@ -2,7 +2,7 @@
   "name": "zerofood-backend",
   "version": "0.0.1",
   "description": "Node.js Backend for ZeroFood",
-  "license": "MIT",
+  "license": "",
   "readmeFilename": "README.md",
   "author": {
     "name": "Kanaiah Kothalikar",
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anoopmunshi/ZeroFood-Backend.git"
+    "url": "https://github.com/ZeroFood/ZeroFood-Backend.git"
   },
   "bugs": {
-    "url": "https://github.com/anoopmunshi/ZeroFood-Backend/issues"
+    "url": "https://github.com/ZeroFood/ZeroFood-Backend/issues"
   },
   "tags": [
     "zero food",
@@ -26,6 +26,7 @@
     "@types/cors": "^2.8.6",
     "@types/express": "^4.11.1",
     "@types/node": "^9.6.5",
+    "nodemon": "^2.0.2",
     "typescript": "^3.3.3333"
   },
   "dependencies": {
@@ -33,11 +34,18 @@
     "cors": "^2.8.5",
     "express": "^4.16.3",
     "md5": "^2.2.1",
+    "mongodb": "^3.5.5",
     "mysql": "^2.15.0",
     "pg": "^8.0.0",
     "typeorm": "^0.2.0"
   },
   "scripts": {
     "start": "tsc && node src/index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "./**/*.js"
+    ],
+    "delay": "2500"
   }
 }

@@ -3,23 +3,24 @@ import { getConnection } from "typeorm";
 import { getRepository } from "typeorm";
 import { User } from "../entity/User";
 import { UserService } from "../services/UserService";
+import { FoodCenter } from "../entity/FoodCenter";
+import { FoodCenterService } from "../services/FoodCenterService";
 
-export class UserController {
+export class FoodCenterController {
     constructor() {
 
     }
 
-    async getUsers(req: Request, res: Response) {
-        return res.send(await getRepository(User).find());
+    async getFoodCenters(req: Request, res: Response) {
+        let foodCenterService = new FoodCenterService();
+        return res.send(await foodCenterService.getAll());
     }
 
-    async createUser(req: Request, res: Response) {
+    async addFoodCenter(req: Request, res: Response) {
         try {
-            let userService = new UserService();
-            console.log(req.body);
-            const user = new User(req.body);
-            console.log(user);
-            res.send(await userService.saveUser(user));
+            let foodCenterService = new FoodCenterService();
+            const foodCenter = new FoodCenter(req.body);
+            res.send(await foodCenterService.saveFoodCenter(foodCenter));
         } catch (e) {
             res.status(500);
             res.send(e.message);

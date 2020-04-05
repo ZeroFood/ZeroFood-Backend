@@ -16,11 +16,17 @@ export class UserController {
     async createUser(req: Request, res: Response) {
         try {
             let userService = new UserService();
-            console.log(req.body);
             const user = new User(req.body);
-            console.log(user);
-            res.send(await userService.saveUser(user));
+            const existingUser = await userService.getUserByEmailId(user.emailId);
+            if (existingUser) {
+
+                res.statusCode = 409;
+                res.send("User with this Email Id is already registered");
+            } else {
+                res.send(await userService.saveUser(user));
+            }
         } catch (e) {
+            console.log(e);
             res.status(500);
             res.send(e.message);
         }

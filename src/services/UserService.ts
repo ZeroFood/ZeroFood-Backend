@@ -16,6 +16,14 @@ export class UserService {
         });
     }
 
+    getUserByEmailId(emailId: string): Promise<User> {
+        return this.userRepository.findOne({
+            where: {
+                emailId: emailId
+            }
+        });
+    }
+
     saveUser(user: User): Promise<User> {
         return this.userRepository.save(user);
     }

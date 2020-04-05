@@ -1,5 +1,6 @@
 import * as express from "express";
 import { UserController } from './controller/UserController';
+import { FoodCenterController } from "./controller/FoodCenterController";
 
 const router = express.Router();
 
@@ -10,7 +11,8 @@ router.post("/users", userController.createUser);
 
 
 // Food Centers
-// router.get("/food-centers");
-// router.post("/food-centers");
+let foodCenterController = new FoodCenterController();
+router.get("/food-centers", foodCenterController.getFoodCenters);
+router.post("/food-centers", foodCenterController.addFoodCenter);
 
 export default router;

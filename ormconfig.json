@@ -1,10 +1,11 @@
 {
-  "type": "postgres",
+  "type": "mongodb",
   "host": "localhost",
-  "port": 5432,
-  "username": "postgres",
-  "password": "kothalikar",
+  "port": 27017,
+  "username": "admin",
+  "password": "zerofood1",
   "database": "zerofood",
+  "authSource": "admin",
   "synchronize": true,
   "entities": [
     "src/entity/*.js"

@@ -1,37 +1,50 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm";
-import Role from "./Role";
-const md5 = require('md5');
+import { Entity, Column, CreateDateColumn, ObjectIdColumn, ObjectID, Double } from "typeorm";
+import { FCStatus } from "./FCStatus";
+import { User } from "./User";
+import { Location } from "./Location";
 
 @Entity()
-export class User {
+export class FoodCenter {
 
     constructor(json: Object) {
         Object.assign(this, json);
     }
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @ObjectIdColumn()
+    id: ObjectID;
 
     @Column()
-    fullName: string;
+    name: string;
 
     @Column()
-    emailId: string;
-
-    password: string;
+    address: string;
 
     @Column()
-    encryptedPassword: string;
+    city: string;
 
     @Column()
-    phoneNumber: string;
+    state: string;
 
-    @Column({
-        type: "enum",
-        enum: Role,
-        default: Role.USER
-    })
-    role: Role;
+    @Column()
+    capcity: number;
+
+    @Column({ type: "double" })
+    lat: Double;
+
+    @Column({ type: "double" })
+    long: Double;
+
+    @Column("simple-json")
+    location: Location;
+
+    @Column()
+    contactNumber: string;
+
+    @Column({ nullable: false })
+    user: User;
+
+    @Column()
+    status: FCStatus = FCStatus.UNLISTED;
 
     @CreateDateColumn()
     createdDate: Date;
@@ -39,9 +52,5 @@ export class User {
     @CreateDateColumn()
     updatedDate: Date;
 
-    @BeforeInsert()
-    encryptPassword() {
-        this.encryptedPassword = md5(this.password);
-    }
 
 }

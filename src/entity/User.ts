@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BeforeInsert, ObjectIdColumn, ObjectID } from "typeorm";
 import Role from "./Role";
 const md5 = require('md5');
 
@@ -9,8 +9,8 @@ export class User {
         Object.assign(this, json);
     }
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @ObjectIdColumn()
+    id: ObjectID;
 
     @Column()
     fullName: string;
