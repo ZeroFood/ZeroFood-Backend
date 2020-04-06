@@ -15,6 +15,7 @@ async function initialize() {
     app.use(express.json());
 
     app.use("/api/", apiRouter);
+    app.use('/apidoc', express.static('apidoc'));
 
     app.listen(appConstants.port, () => {
         console.log(process.pid);
