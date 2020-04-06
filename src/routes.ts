@@ -11,6 +11,12 @@ let userController = new UserController();
  * @api {get} /users/ Get All Users
  * @apiName GetUsers
  * @apiGroup User
+ * 
+ * @apiHeader {String} Authorization Send valid auth token as Bearer 
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer valid-token-from-login-response"
+ *     }
  *
  * @apiSuccess {Object[]} users       List of users.
  * @apiSuccess {String}   user.id     User unique id.
@@ -26,6 +32,12 @@ router.get("/users", AuthMiddleware.validate, userController.getUsers);
  * @api {post} /users/ Add a new User
  * @apiName AddUser
  * @apiGroup User
+ * 
+ * @apiHeader {String} Authorization Send valid auth token as Bearer 
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer valid-token-from-login-response"
+ *     }
  * 
  * @apiParam (Request body) {Object} user  User object
  * @apiParam (Request body) {String} user.fullName Users full name.
@@ -45,6 +57,19 @@ router.post("/users", AuthMiddleware.validate, userController.createUser);
 
 // Authentication
 let authController = new AuthController();
+/**
+ * @api {post} /login Login api
+ * @apiName Login
+ * @apiGroup Authentication
+ * 
+ * @apiParam (Request body) {Object} user  User object
+ * @apiParam (Request body) {String} foodCenter.emailId Email Id of the user.
+ * @apiParam (Request body) {Sting} foodCenter.password Password of the user.
+ * 
+ * @apiSuccess {Object}  authResponse Auth Token response.
+ * @apiSuccess {String}   authResponse.token Valid auth token.
+ * @apiSuccess {String}   authResponse.expiry Auth token expiry.
+ */
 router.post("/login", authController.login);
 
 // Food Centers
@@ -53,6 +78,12 @@ let foodCenterController = new FoodCenterController();
  * @api {get} /food-centers/ Get All or Search Food Centers
  * @apiName GetFoodCenters
  * @apiGroup Food Center
+ * 
+ * @apiHeader {String} Authorization Send valid auth token as Bearer 
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer valid-token-from-login-response"
+ *     }
  *
  * @apiParam {String}   q   search query
  * @apiParam {String}   lat latitude
@@ -80,6 +111,12 @@ router.get("/food-centers", AuthMiddleware.validate, foodCenterController.getFoo
  * @api {post} /food-centers/ Add a new food center
  * @apiName AddFoodCenter
  * @apiGroup Food Center
+ * 
+ * @apiHeader {String} Authorization Send valid auth token as Bearer 
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer valid-token-from-login-response"
+ *     }
  * 
  * @apiParam (Request body) {Object} foodCenter  Food Center object
  * @apiParam (Request body) {String} foodCenter.name name.
@@ -111,6 +148,12 @@ router.post("/food-centers", AuthMiddleware.validate, foodCenterController.addFo
  * @api {put} /food-centers/:id Update existing food center
  * @apiName UpdateFoodCenter
  * @apiGroup Food Center
+ * 
+ * @apiHeader {String} Authorization Send valid auth token as Bearer 
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer valid-token-from-login-response"
+ *     }
  * 
  * @apiParam {String} id Food Center id.
  * 
