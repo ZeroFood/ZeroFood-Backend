@@ -1,9 +1,7 @@
 {
   "type": "mongodb",
-  "host": "localhost",
+  "url": "mongodb+srv://admin:zerofood1@zerofood-backend-de0e1.mongodb.net/test?retryWrites=true&w=majority",
   "port": 27017,
-  "username": "admin",
-  "password": "zerofood1",
   "database": "zerofood",
   "authSource": "admin",
   "synchronize": true,
