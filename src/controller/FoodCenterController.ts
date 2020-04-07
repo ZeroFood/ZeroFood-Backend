@@ -35,10 +35,14 @@ export class FoodCenterController {
     }
 
 
-    // async search(req: Request, res: Response) {
-    //     let foodCenterService = new FoodCenterService();
-    //     return res.send(await foodCenterService.getAll());
-    // }
-
+    async getFoodCenterCount(req: Request, res: Response) {
+        try {
+            let foodCenterService = new FoodCenterService();
+            let count = await foodCenterService.getFoodCenterCount(req.query);
+            res.send({count : count});
+        } catch (e) {
+            res.send("Error: " + e.message);
+        }
+    }
 
 }

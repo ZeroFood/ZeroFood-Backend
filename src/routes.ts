@@ -184,4 +184,23 @@ router.post("/food-centers", AuthMiddleware.validate, foodCenterController.addFo
  */
 router.put("/food-centers/:id", AuthMiddleware.validate, foodCenterController.updateFoodCenter);
 
+
+
+/**
+ * @api {put} /food-centers/count Get the count of Food Centers
+ * @apiName FoodCenterCount
+ * @apiGroup Food Center
+ * 
+ * @apiParam {String}   q   search query
+ * @apiParam {String}   lat latitude
+ * @apiParam {String}   long longitude
+ * @apiParam {String}   radius radius
+ * @apiParam {String}   status comma separated status ex: LISTED,UNLISTED,DELETED 
+ * 
+ * @apiSuccess {Object}  foodCenterCount Food centers count object.
+ * @apiSuccess {Number}   foodCenterCount.count Count of food centers.
+ */
+router.get("/food-centers/count", foodCenterController.getFoodCenterCount);
+
+
 export default router;

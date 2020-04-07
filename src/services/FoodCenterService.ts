@@ -17,6 +17,11 @@ export class FoodCenterService {
     }
 
     getAll(search: FoodCenterSearch): Promise<FoodCenter[]> {
+        let queryOptions = this.formQueryOptions(search);
+        return this.foodCenterRepository.find(queryOptions);
+    }
+
+    formQueryOptions(search: FoodCenterSearch): any {
         let query: any = {
             status: {
                 $in: [FCStatus.LISTED]
@@ -45,8 +50,7 @@ export class FoodCenterService {
         }
 
         console.log(JSON.stringify(query));
-
-        return this.foodCenterRepository.find(query);
+        return query;
     }
 
     getFoodCenterById(id: string): Promise<FoodCenter> {
@@ -63,6 +67,11 @@ export class FoodCenterService {
 
     updateFoodCenter(id: string, foodCenter: FoodCenter): Promise<UpdateResult> {
         return this.foodCenterRepository.update(id, foodCenter);
+    }
+
+    getFoodCenterCount(search: FoodCenterSearch) : Promise<number>{
+        let queryOptions = this.formQueryOptions(search);
+        return this.foodCenterRepository.count(queryOptions);
     }
 
 }
