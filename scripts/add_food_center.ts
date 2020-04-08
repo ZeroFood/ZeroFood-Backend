@@ -22,9 +22,9 @@ const results = [];
     let pojoArr: FoodCenter[] = [];
     jsonArr.forEach(json => {
       let startlTime = json["Lunch-Time - IN"] ? json["Lunch-Time - IN"].trim() : null;
-      let endlTime = json["Lunch-Time - OUT"] ? json["Lunch-Time - OUT"].trim() : null;
-      let startdTime = json["Dinner-Time - IN"] ? json["Dinner-Time - IN"].trim() : null;
-      let enddTime = json["Dinner-Time - OUT"] ? json["Dinner-Time - OUT"].trim() : null;
+      let endlTime = json["Lunch-Time - Out"] ? json["Lunch-Time - Out"].trim() : null;
+      let startdTime = json["Dinner Time - IN"] ? json["Dinner Time - IN"].trim() : null;
+      let enddTime = json["Dinner Time - Out"] ? json["Dinner Time - Out"].trim() : null;
       let foodCenter = new FoodCenter({
         "name": json["Place_Name"].trim(),
         "state": json["State"].trim(),
@@ -45,6 +45,9 @@ const results = [];
         "location": {
           "type": "Point",
           "coordinates": [parseFloat(json['Long'].trim()), parseFloat(json['Lat'].trim())]
+        },
+        "user": {
+          "id": "5e8b6697af82be3aba8d531f"
         }
       });
       pojoArr.push(foodCenter);

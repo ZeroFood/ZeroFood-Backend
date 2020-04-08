@@ -103,6 +103,36 @@ let foodCenterController = new FoodCenterController();
  */
 router.get("/food-centers", foodCenterController.getFoodCenters);
 
+/** 
+ * @api {get} /food-centers/user/id Get Food Centers By User Id
+ * @apiName GetFoodCentersByUserId
+ * @apiGroup Food Center
+ *
+ * @apiParam {String}   id   user id
+ * 
+ * @apiSuccess {Object[]}  foodCenter List of all food centers.
+ * @apiSuccess {String}   foodCenter.id Food Center Id.
+ * @apiSuccess {String}   foodCenter.name Food Center Name.
+ * @apiSuccess {String}   foodCenter.address Food Center Address.
+ * @apiSuccess {String}   foodCenter.city City.
+ * @apiSuccess {String}   foodCenter.state State.
+ * @apiSuccess {Number}   foodCenter.capacity Food Center capacity.
+ * @apiSuccess {Object}   foodCenter.location Location Object.
+ * @apiSuccess {String}   foodCenter.location.type Location type.
+ * @apiSuccess {Number[]} foodCenter.location.coordinates Array with longitude at 0 and latitude at 1 index.
+ * @apiSuccess {Object}   foodCenter.timings Timings Object.
+ * @apiSuccess {Object}   foodCenter.timings.lunch Lunch timings Object.
+ * @apiSuccess {String}   foodCenter.timings.lunch.start Start lunch time.
+ * @apiSuccess {String}   foodCenter.timings.lunch.end End lunch time.
+ * @apiSuccess {Object}   foodCenter.timings.dinner Dinner timings Object.
+ * @apiSuccess {String}   foodCenter.timings.dinner.start Start dinner time.
+ * @apiSuccess {String}   foodCenter.timings.dinner.end End dinner time.
+ * @apiSuccess {String}   foodCenter.contactNumber Contact Number of the food organizer.
+ * @apiSuccess {String}   foodCenter.status Status of the food center.
+ * 
+ */
+router.get("/food-centers/users/:id", foodCenterController.getFoodCentersByUserId);
+
 /**
  * @api {post} /food-centers/ Add a new food center
  * @apiName AddFoodCenter

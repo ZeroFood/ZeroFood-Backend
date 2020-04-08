@@ -2,11 +2,11 @@ import { Repository, getRepository, UpdateResult } from "typeorm";
 import { FoodCenter } from "../entity/FoodCenter";
 import { FCStatus } from "../entity/FCStatus";
 export class FoodCenterSearch {
-    q: string;
-    lat: string;
-    long: string;
-    radius: string;
-    status: FCStatus;
+    q?: string;
+    lat?: string;
+    long?: string;
+    radius?: string;
+    status?: FCStatus;
 }
 
 export class FoodCenterService {
@@ -19,6 +19,10 @@ export class FoodCenterService {
     getAll(search: FoodCenterSearch): Promise<FoodCenter[]> {
         let queryOptions = this.formQueryOptions(search);
         return this.foodCenterRepository.find(queryOptions);
+    }
+
+    getByUserId(id: string): Promise<FoodCenter[]> {
+        return this.foodCenterRepository.find({ "user": { "id": id } });
     }
 
     formQueryOptions(search: FoodCenterSearch): any {
@@ -76,7 +80,7 @@ export class FoodCenterService {
         return this.foodCenterRepository.update(id, foodCenter);
     }
 
-    getFoodCenterCount(search: FoodCenterSearch) : Promise<number>{
+    getFoodCenterCount(search: FoodCenterSearch): Promise<number> {
         let queryOptions = this.formQueryOptions(search);
         return this.foodCenterRepository.count(queryOptions);
     }

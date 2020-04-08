@@ -12,7 +12,16 @@ export class FoodCenterController {
         try {
             let foodCenterService = new FoodCenterService();
             res.send(await foodCenterService.getAll(req.query));
-        } catch(e) {
+        } catch (e) {
+            res.statusCode = 500;
+            res.send(new ErrorResponse(500, e.message));
+        }
+    }
+    async getFoodCentersByUserId(req: Request, res: Response) {
+        try {
+            let foodCenterService = new FoodCenterService();
+            res.send(await foodCenterService.getByUserId(req.params.id));
+        } catch (e) {
             res.statusCode = 500;
             res.send(new ErrorResponse(500, e.message));
         }
@@ -46,7 +55,7 @@ export class FoodCenterController {
         try {
             let foodCenterService = new FoodCenterService();
             let count = await foodCenterService.getFoodCenterCount(req.query);
-            res.send({count : count});
+            res.send({ count: count });
         } catch (e) {
             res.statusCode = 500;
             res.send(new ErrorResponse(500, e.message));
