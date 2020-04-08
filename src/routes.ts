@@ -33,12 +33,6 @@ router.get("/users", AuthMiddleware.validate, userController.getUsers);
  * @apiName AddUser
  * @apiGroup User
  * 
- * @apiHeader {String} Authorization Send valid auth token as Bearer 
- * @apiHeaderExample {json} Header-Example:
- *     {
- *       "Authorization": "Bearer valid-token-from-login-response"
- *     }
- * 
  * @apiParam (Request body) {Object} user  User object
  * @apiParam (Request body) {String} user.fullName Users full name.
  * @apiParam (Request body) {Sting} user.emailId Users email Id.
@@ -53,7 +47,7 @@ router.get("/users", AuthMiddleware.validate, userController.getUsers);
  * @apiSuccess {String}   user.phoneNumber Users phone number.
  * @apiSuccess {String}   user.encryptedPassword Users encryptedPassword.
  */
-router.post("/users", AuthMiddleware.validate, userController.createUser);
+router.post("/users", userController.createUser);
 
 // Authentication
 let authController = new AuthController();
