@@ -107,7 +107,13 @@ router.get("/food-centers", foodCenterController.getFoodCenters);
  * @api {get} /food-centers/user/id Get Food Centers By User Id
  * @apiName GetFoodCentersByUserId
  * @apiGroup Food Center
- *
+ * 
+ * @apiHeader {String} Authorization Send valid auth token as Bearer 
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer valid-token-from-login-response"
+ *     }
+ * 
  * @apiParam {String}   id   user id
  * 
  * @apiSuccess {Object[]}  foodCenter List of all food centers.
@@ -131,7 +137,7 @@ router.get("/food-centers", foodCenterController.getFoodCenters);
  * @apiSuccess {String}   foodCenter.status Status of the food center.
  * 
  */
-router.get("/food-centers/users/:id", foodCenterController.getFoodCentersByUserId);
+router.get("/food-centers/users/:id", AuthMiddleware.validate, foodCenterController.getFoodCentersByUserId);
 
 /**
  * @api {post} /food-centers/ Add a new food center
