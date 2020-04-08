@@ -3,6 +3,7 @@ import { getConnection } from "typeorm";
 import { getRepository } from "typeorm";
 import { User } from "./../entity/User";
 import { UserService } from "./../services/UserService";
+import { ErrorResponse } from "../entity/ErrorResponse";
 
 export class UserController {
     constructor() {
@@ -22,15 +23,15 @@ export class UserController {
             const existingUser = await userService.getUserByEmailId(user.emailId);
             if (existingUser) {
                 res.statusCode = 409;
-                res.send("User with this Email Id is already registered");
+                res.send(new ErrorResponse(409, "User with this Email Id is already registered"));
             } else {
                 user.encryptPassword(req.body.password);
                 res.send(await userService.saveUser(user));
             }
         } catch (e) {
             console.log(e);
-            res.status(500);
-            res.send(e.message);
+            res.statusCode = 500;
+            res.send(new ErrorResponse(500, e.message));
         }
     }
 

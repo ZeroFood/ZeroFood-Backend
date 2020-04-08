@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import { FoodCenter } from "../entity/FoodCenter";
 import { FoodCenterService } from "../services/FoodCenterService";
+import { ErrorResponse } from "../entity/ErrorResponse";
 
 export class FoodCenterController {
     constructor() {
@@ -8,8 +9,13 @@ export class FoodCenterController {
     }
 
     async getFoodCenters(req: Request, res: Response) {
-        let foodCenterService = new FoodCenterService();
-        return res.send(await foodCenterService.getAll(req.query));
+        try {
+            let foodCenterService = new FoodCenterService();
+            res.send(await foodCenterService.getAll(req.query));
+        } catch(e) {
+            res.statusCode = 500;
+            res.send(new ErrorResponse(500, e.message));
+        }
     }
 
     async addFoodCenter(req: Request, res: Response) {
@@ -18,8 +24,8 @@ export class FoodCenterController {
             const foodCenter = new FoodCenter(req.body);
             res.send(await foodCenterService.saveFoodCenter(foodCenter));
         } catch (e) {
-            res.status(500);
-            res.send(e.message);
+            res.statusCode = 500;
+            res.send(new ErrorResponse(500, e.message));
         }
     }
 
@@ -30,7 +36,8 @@ export class FoodCenterController {
             await foodCenterService.updateFoodCenter(req.params.id, foodCenter)
             res.send(await foodCenterService.getFoodCenterById(req.params.id));
         } catch (e) {
-            res.send("Error: " + e.message);
+            res.statusCode = 500;
+            res.send(new ErrorResponse(500, e.message));
         }
     }
 
@@ -41,7 +48,8 @@ export class FoodCenterController {
             let count = await foodCenterService.getFoodCenterCount(req.query);
             res.send({count : count});
         } catch (e) {
-            res.send("Error: " + e.message);
+            res.statusCode = 500;
+            res.send(new ErrorResponse(500, e.message));
         }
     }
 

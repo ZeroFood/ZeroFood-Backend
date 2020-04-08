@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AuthService } from "../services/AuthService";
+import { ErrorResponse } from "../entity/ErrorResponse";
 
 export class AuthMiddleware {
     constructor() {
@@ -15,7 +16,7 @@ export class AuthMiddleware {
             next();
         } catch (e) {
             res.statusCode = 401;
-            res.send(e.message);
+            res.send(new ErrorResponse(401, e.message));
         }
     }
 
