@@ -3,6 +3,16 @@ import { FCStatus } from "./FCStatus";
 import { User } from "./User";
 import { Location } from "./Location";
 
+export class Time {
+    start: string;
+    end: string;
+}
+
+export class Timings {
+    lunch?: Time;
+    dinner?: Time;
+}
+
 @Entity()
 export class FoodCenter {
 
@@ -36,6 +46,9 @@ export class FoodCenter {
 
     @Column("simple-json")
     location: Location;
+
+    @Column()
+    timings: Timings;
 
     @Column()
     contactNumber: string;

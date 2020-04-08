@@ -62,6 +62,13 @@ export class FoodCenterService {
     }
 
     saveFoodCenter(foodCenter: FoodCenter): Promise<FoodCenter> {
+        if (foodCenter.location && foodCenter.location.coordinates) {
+            let coord = foodCenter.location.coordinates;
+            if (coord.length == 2) {
+                foodCenter.long = coord[0];
+                foodCenter.lat = coord[1];
+            }
+        }
         return this.foodCenterRepository.save(foodCenter);
     }
 

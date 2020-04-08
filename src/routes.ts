@@ -96,6 +96,13 @@ let foodCenterController = new FoodCenterController();
  * @apiSuccess {Object}   foodCenter.location Location Object.
  * @apiSuccess {String}   foodCenter.location.type Location type.
  * @apiSuccess {Number[]} foodCenter.location.coordinates Array with longitude at 0 and latitude at 1 index.
+ * @apiSuccess {Object}   foodCenter.timings Timings Object.
+ * @apiSuccess {Object}   foodCenter.timings.lunch Lunch timings Object.
+ * @apiSuccess {String}   foodCenter.timings.lunch.start Start lunch time.
+ * @apiSuccess {String}   foodCenter.timings.lunch.end End lunch time.
+ * @apiSuccess {Object}   foodCenter.timings.dinner Dinner timings Object.
+ * @apiSuccess {String}   foodCenter.timings.dinner.start Start dinner time.
+ * @apiSuccess {String}   foodCenter.timings.dinner.end End dinner time.
  * @apiSuccess {String}   foodCenter.contactNumber Contact Number of the food organizer.
  * @apiSuccess {String}   foodCenter.status Status of the food center.
  * 
@@ -122,6 +129,13 @@ router.get("/food-centers", foodCenterController.getFoodCenters);
  * @apiParam (Request body) {Object} foodCenter.location Location Object.
  * @apiParam (Request body) {String} foodCenter.location.type Location Type - "Point".
  * @apiParam (Request body) {Number[]} foodCenter.location.coordinates Array of longitude, latitude ex: [long, lat].
+ * @apiParam (Request body) {Object}   foodCenter.timings Timings Object.
+ * @apiParam (Request body) {Object}   foodCenter.timings.lunch Lunch timings Object.
+ * @apiParam (Request body) {String}   foodCenter.timings.lunch.start Start lunch time.
+ * @apiParam (Request body) {String}   foodCenter.timings.lunch.end End lunch time.
+ * @apiParam (Request body) {Object}   foodCenter.timings.dinner Dinner timings Object.
+ * @apiParam (Request body) {String}   foodCenter.timings.dinner.start Start dinner time.
+ * @apiParam (Request body) {String}   foodCenter.timings.dinner.end End dinner time.
  * @apiParam (Request body) {String} foodCenter.contactNumber Contact Number of the food organizer.
  * 
  * @apiSuccess {Object}  foodCenter Successfully added food center.
@@ -134,6 +148,13 @@ router.get("/food-centers", foodCenterController.getFoodCenters);
  * @apiSuccess {Object}   foodCenter.location Location Object.
  * @apiSuccess {String}   foodCenter.location.type Location type.
  * @apiSuccess {Number[]} foodCenter.location.coordinates Array with longitude at 0 and latitude at 1 index.
+ * @apiSuccess {Object}   foodCenter.timings Timings Object.
+ * @apiSuccess {Object}   foodCenter.timings.lunch Lunch timings Object.
+ * @apiSuccess {String}   foodCenter.timings.lunch.start Start lunch time.
+ * @apiSuccess {String}   foodCenter.timings.lunch.end End lunch time.
+ * @apiSuccess {Object}   foodCenter.timings.dinner Dinner timings Object.
+ * @apiSuccess {String}   foodCenter.timings.dinner.start Start dinner time.
+ * @apiSuccess {String}   foodCenter.timings.dinner.end End dinner time.
  * @apiSuccess {String}   foodCenter.contactNumber Contact Number of the food organizer.
  * @apiSuccess {String}   foodCenter.status Status of the food center.
  */
@@ -161,6 +182,13 @@ router.post("/food-centers", AuthMiddleware.validate, foodCenterController.addFo
  * @apiParam (Request body) {Object} foodCenter.location Location Object.
  * @apiParam (Request body) {String} foodCenter.location.type Location Type - "Point".
  * @apiParam (Request body) {Number[]} foodCenter.location.coordinates Array of longitude, latitude ex: [long, lat].
+ * @apiParam (Request body) {Object}   foodCenter.timings Timings Object.
+ * @apiParam (Request body) {Object}   foodCenter.timings.lunch Lunch timings Object.
+ * @apiParam (Request body) {String}   foodCenter.timings.lunch.start Start lunch time.
+ * @apiParam (Request body) {String}   foodCenter.timings.lunch.end End lunch time.
+ * @apiParam (Request body) {Object}   foodCenter.timings.dinner Dinner timings Object.
+ * @apiParam (Request body) {String}   foodCenter.timings.dinner.start Start dinner time.
+ * @apiParam (Request body) {String}   foodCenter.timings.dinner.end End dinner time.
  * @apiParam (Request body) {String} foodCenter.contactNumber Contact Number of the food organizer.
  * @apiParam (Request body) {String} foodCenter.status Status of the food center ex: LISTED or UNLISTED or DELETED.
  * 
@@ -174,6 +202,13 @@ router.post("/food-centers", AuthMiddleware.validate, foodCenterController.addFo
  * @apiSuccess {Object}   foodCenter.location Location Object.
  * @apiSuccess {String}   foodCenter.location.type Location type.
  * @apiSuccess {Number[]} foodCenter.location.coordinates Array with longitude at 0 and latitude at 1 index.
+ * @apiSuccess {Object}   foodCenter.timings Timings Object.
+ * @apiSuccess {Object}   foodCenter.timings.lunch Lunch timings Object.
+ * @apiSuccess {String}   foodCenter.timings.lunch.start Start lunch time.
+ * @apiSuccess {String}   foodCenter.timings.lunch.end End lunch time.
+ * @apiSuccess {Object}   foodCenter.timings.dinner Dinner timings Object.
+ * @apiSuccess {String}   foodCenter.timings.dinner.start Start dinner time.
+ * @apiSuccess {String}   foodCenter.timings.dinner.end End dinner time.
  * @apiSuccess {String}   foodCenter.contactNumber Contact Number of the food organizer.
  * @apiSuccess {String}   foodCenter.status Status of the food center.
  */
