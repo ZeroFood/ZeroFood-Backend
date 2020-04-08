@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 export class AuthToken {
     token: string;
     expiry?: number = 3600;
+    user: User;
 }
 
 export class AuthService {
@@ -32,7 +33,8 @@ export class AuthService {
 
         return {
             token: token,
-            expiry: 3600
+            expiry: 3600,
+            user: user
         };
     }
 

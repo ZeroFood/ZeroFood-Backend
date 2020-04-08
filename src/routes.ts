@@ -69,6 +69,7 @@ let authController = new AuthController();
  * @apiSuccess {Object}  authResponse Auth Token response.
  * @apiSuccess {String}   authResponse.token Valid auth token.
  * @apiSuccess {String}   authResponse.expiry Auth token expiry.
+ * @apiSuccess {Object}   authResponse.user user details object.
  */
 router.post("/login", authController.login);
 
@@ -78,12 +79,6 @@ let foodCenterController = new FoodCenterController();
  * @api {get} /food-centers/ Get All or Search Food Centers
  * @apiName GetFoodCenters
  * @apiGroup Food Center
- * 
- * @apiHeader {String} Authorization Send valid auth token as Bearer 
- * @apiHeaderExample {json} Header-Example:
- *     {
- *       "Authorization": "Bearer valid-token-from-login-response"
- *     }
  *
  * @apiParam {String}   q   search query
  * @apiParam {String}   lat latitude
@@ -105,7 +100,7 @@ let foodCenterController = new FoodCenterController();
  * @apiSuccess {String}   foodCenter.status Status of the food center.
  * 
  */
-router.get("/food-centers", AuthMiddleware.validate, foodCenterController.getFoodCenters);
+router.get("/food-centers", foodCenterController.getFoodCenters);
 
 /**
  * @api {post} /food-centers/ Add a new food center
