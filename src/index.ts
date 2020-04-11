@@ -9,7 +9,7 @@ var basicAuth = require('basic-auth');
 async function initialize() {
     const app = express();
 
-    // await createConnection();
+    await createConnection();
     app.use(cors());
 
     app.use(express.json());
