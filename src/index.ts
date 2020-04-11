@@ -4,7 +4,7 @@ import apiRouter from './routes';
 import appConstants from './constants/AppConstants';
 import { createConnection } from "typeorm";
 import * as cors from "cors";
-import { AuthService } from "./services/AuthService";
+var basicAuth = require('basic-auth');
 
 async function initialize() {
     const app = express();
@@ -14,8 +14,22 @@ async function initialize() {
 
     app.use(express.json());
 
+    var auth = function (req, res, next) {
+        var user = basicAuth(req);
+        if (!user || !user.name || !user.pass) {
+            res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+            res.sendStatus(401);
+        }
+        if (user.name === 'admin' && user.pass === 'zerofood1') {
+            next();
+        } else {
+            res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+            res.sendStatus(401);
+        }
+    }
+
     app.use("/api/", apiRouter);
-    app.use('/apidoc', express.static('apidoc'));
+    app.use('/apidoc', auth, express.static('apidoc'));
 
     app.listen(appConstants.port, () => {
         console.log(process.pid);

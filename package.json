@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@types/jsonwebtoken": "^8.3.8",
+    "basic-auth": "^2.0.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.5",
     "express": "^4.16.3",

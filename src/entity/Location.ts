@@ -15,4 +15,5 @@ export class Location {
     type: GeoJSONType = GeoJSONType.Point;
     coordinates: Double[];
     geometries: Location[];
+    googleAddress: string;
 }

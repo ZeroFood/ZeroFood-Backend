@@ -40,12 +40,28 @@ export class FoodCenterService {
                 }
             };
         } else {
-            if (search.q)
-                query['$or'] = [
-                    { state: { $regex: ".*" + search.q + ".*", $options: "i" } },
-                    { city: { $regex: ".*" + search.q + ".*", $options: "i" } },
-                    { address: { $regex: ".*" + search.q + ".*", $options: "i" } }
-                ];
+            if (search.q) {
+                let split = search.q.trim().split(",");
+                if (split.length === 3) {
+                    query['$or'] = [
+                        { state: { $regex: ".*" + split[2].trim() + ".*", $options: "i" } },
+                        { city: { $regex: ".*" + split[1].trim() + ".*", $options: "i" } },
+                        { address: { $regex: ".*" + split[0].trim() + ".*", $options: "i" } }
+                    ];
+                } else if (split.length === 2) {
+                    query['$or'] = [
+                        { state: { $regex: ".*" + split[1].trim() + ".*", $options: "i" } },
+                        { city: { $regex: ".*" + split[1].trim() + ".*", $options: "i" } },
+                        { address: { $regex: ".*" + split[0].trim() + ".*", $options: "i" } }
+                    ];
+                } else {
+                    query['$or'] = [
+                        { state: { $regex: ".*" + split[0] + ".*", $options: "i" } },
+                        { city: { $regex: ".*" + split[0] + ".*", $options: "i" } },
+                        { address: { $regex: ".*" + split[0] + ".*", $options: "i" } }
+                    ];
+                }
+            }
         }
 
         if (search.status) {
