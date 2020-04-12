@@ -36,7 +36,7 @@ export class FoodCenter {
     state: string;
 
     @Column()
-    capcity: number;
+    capacity: number;
 
     @Column({ type: "double" })
     lat: Double;
