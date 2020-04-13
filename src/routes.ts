@@ -260,10 +260,8 @@ router.post("/food-centers", AuthMiddleware.validate, foodCenterController.addFo
  */
 router.put("/food-centers/:id", AuthMiddleware.validate, foodCenterController.updateFoodCenter);
 
-
-
 /**
- * @api {put} /food-centers/count Get the count of Food Centers
+ * @api {get} /food-centers/count Get the count of Food Centers
  * @apiName FoodCenterCount
  * @apiGroup Food Center
  * 
@@ -277,6 +275,38 @@ router.put("/food-centers/:id", AuthMiddleware.validate, foodCenterController.up
  * @apiSuccess {Number}   foodCenterCount.count Count of food centers.
  */
 router.get("/food-centers/count", foodCenterController.getFoodCenterCount);
+
+/** 
+ * @api {get} /food-centers/:id Get Food center details by id
+ * @apiName GetFoodCenterById
+ * @apiGroup Food Center
+ *
+ * @apiParam {String}   id   Food center Id
+ * 
+ * @apiSuccess {Object}  foodCenter Food Center Object.
+ * @apiSuccess {String}   foodCenter.id Food Center Id.
+ * @apiSuccess {String}   foodCenter.name Food Center Name.
+ * @apiSuccess {String}   foodCenter.address Food Center Address.
+ * @apiSuccess {String}   foodCenter.city City.
+ * @apiSuccess {String}   foodCenter.state State.
+ * @apiSuccess {Number}   foodCenter.capacity Food Center capacity.
+ * @apiSuccess {Object}   foodCenter.location Location Object.
+ * @apiSuccess {String}   foodCenter.location.type Location type.
+ * @apiSuccess {Number[]} foodCenter.location.coordinates Array with longitude at 0 and latitude at 1 index.
+ * @apiSuccess {Object}   foodCenter.timings Timings Object.
+ * @apiSuccess {Object}   foodCenter.timings.lunch Lunch timings Object.
+ * @apiSuccess {String}   foodCenter.timings.lunch.start Start lunch time.
+ * @apiSuccess {String}   foodCenter.timings.lunch.end End lunch time.
+ * @apiSuccess {Object}   foodCenter.timings.dinner Dinner timings Object.
+ * @apiSuccess {String}   foodCenter.timings.dinner.start Start dinner time.
+ * @apiSuccess {String}   foodCenter.timings.dinner.end End dinner time.
+ * @apiSuccess {Object}   foodCenter.user  Object of the user who has added
+ * @apiSuccess {String}   foodCenter.user.id  User id
+ * @apiSuccess {String}   foodCenter.contactNumber Contact Number of the food organizer.
+ * @apiSuccess {String}   foodCenter.status Status of the food center.
+ * 
+ */
+router.get("/food-centers/:id", foodCenterController.getFoodCenterById);
 
 
 export default router;

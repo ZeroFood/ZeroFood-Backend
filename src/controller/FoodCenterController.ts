@@ -17,6 +17,17 @@ export class FoodCenterController {
             res.send(new ErrorResponse(500, e.message));
         }
     }
+
+    async getFoodCenterById(req: Request, res: Response) {
+        try {
+            let foodCenterService = new FoodCenterService();
+            res.send(await foodCenterService.getById(req.params.id));
+        } catch (e) {
+            res.statusCode = 500;
+            res.send(new ErrorResponse(500, e.message));
+        }
+    }
+
     async getFoodCentersByUserId(req: Request, res: Response) {
         try {
             let foodCenterService = new FoodCenterService();

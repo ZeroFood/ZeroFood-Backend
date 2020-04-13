@@ -32,6 +32,11 @@ export class FoodCenterService {
         return this.foodCenterRepository.find({ "user": user });
     }
 
+    getById(id: string): Promise<FoodCenter> {
+        let query: any = { "id": id };
+        return this.foodCenterRepository.findOne(query);
+    }
+
     formQueryAggregationOptions(search: FoodCenterSearch): any {
         let radiusInMeters = Number(search.radius ? search.radius : 5) * 1000;
         let queryFilter: any = {
