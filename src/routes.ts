@@ -106,7 +106,7 @@ let foodCenterController = new FoodCenterController();
 router.get("/food-centers", foodCenterController.getFoodCenters);
 
 /** 
- * @api {get} /food-centers/user/id Get Food Centers By User Id
+ * @api {get} /food-centers/user/:id Get Food Centers By User Id
  * @apiName GetFoodCentersByUserId
  * @apiGroup Food Center
  * 

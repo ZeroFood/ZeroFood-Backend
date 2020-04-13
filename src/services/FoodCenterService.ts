@@ -29,8 +29,11 @@ export class FoodCenterService {
     }
 
     getByUserId(id: string): Promise<FoodCenter[]> {
-        const user = new User({ id: id });
-        return this.foodCenterRepository.find({ "user": user });
+        return this.foodCenterRepository.find({
+            where: {
+                "user": { id }
+            }
+        });
     }
 
 
