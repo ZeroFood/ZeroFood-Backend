@@ -1,6 +1,7 @@
-import { Repository, getRepository, UpdateResult } from "typeorm";
+import { Repository, getRepository, UpdateResult, getMongoRepository, MongoRepository, ObjectID } from "typeorm";
 import { FoodCenter } from "../entity/FoodCenter";
 import { FCStatus } from "../entity/FCStatus";
+import { User } from "../entity/User";
 export class FoodCenterSearch {
     q?: string;
     lat?: string;
@@ -10,19 +11,51 @@ export class FoodCenterSearch {
 }
 
 export class FoodCenterService {
-    foodCenterRepository: Repository<FoodCenter>;
+    foodCenterRepository: MongoRepository<FoodCenter>;
 
     constructor() {
-        this.foodCenterRepository = getRepository(FoodCenter);
+        this.foodCenterRepository = getMongoRepository(FoodCenter);
     }
 
-    getAll(search: FoodCenterSearch): Promise<FoodCenter[]> {
-        let queryOptions = this.formQueryOptions(search);
-        return this.foodCenterRepository.find(queryOptions);
+    async getAll(search: FoodCenterSearch): Promise<FoodCenter[]> {
+        if (search.lat && search.long) {
+            let queryAggregationOptions = this.formQueryAggregationOptions(search);
+            return this.foodCenterRepository.aggregate(queryAggregationOptions).toArray();
+        } else {
+            let queryOptions = this.formQueryOptions(search);
+            return this.foodCenterRepository.find(queryOptions);
+        }
     }
 
     getByUserId(id: string): Promise<FoodCenter[]> {
-        return this.foodCenterRepository.find({ "user": { "id": id } });
+        const user = new User({ id: id });
+        return this.foodCenterRepository.find({ "user": user });
+    }
+
+    formQueryAggregationOptions(search: FoodCenterSearch): any {
+        let radiusInMeters = Number(search.radius ? search.radius : 5) * 1000;
+        let queryFilter: any = {
+            status: {
+                $in: [FCStatus.LISTED]
+            }
+        };
+        if (search.status) {
+            let statusArr = search.status.split(",");
+            queryFilter.status["$in"] = statusArr;
+        }
+
+        let query: any = [{
+            '$geoNear': {
+                near: { type: "Point", coordinates: [parseFloat(search.long), parseFloat(search.lat)] },
+                distanceField: "dist.calculated",
+                maxDistance: radiusInMeters,
+                query: queryFilter,
+                includeLocs: "dist.location",
+                spherical: true
+            }
+        }];
+        console.log(JSON.stringify(query));
+        return query;
     }
 
     formQueryOptions(search: FoodCenterSearch): any {
@@ -42,10 +75,16 @@ export class FoodCenterService {
         } else {
             if (search.q) {
                 let split = search.q.trim().split(",");
-                if (split.length === 3) {
+                if (split.length === 4) {
                     query['$or'] = [
                         { state: { $regex: ".*" + split[2].trim() + ".*", $options: "i" } },
                         { city: { $regex: ".*" + split[1].trim() + ".*", $options: "i" } },
+                        { address: { $regex: ".*" + split[0].trim() + ".*", $options: "i" } }
+                    ];
+                } else if (split.length === 3) {
+                    query['$or'] = [
+                        { state: { $regex: ".*" + split[1].trim() + ".*", $options: "i" } },
+                        { city: { $regex: ".*" + split[0].trim() + ".*", $options: "i" } },
                         { address: { $regex: ".*" + split[0].trim() + ".*", $options: "i" } }
                     ];
                 } else if (split.length === 2) {
