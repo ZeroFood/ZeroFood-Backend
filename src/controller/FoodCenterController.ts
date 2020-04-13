@@ -21,7 +21,7 @@ export class FoodCenterController {
     async getFoodCenterById(req: Request, res: Response) {
         try {
             let foodCenterService = new FoodCenterService();
-            res.send(await foodCenterService.getById(req.params.id));
+            res.send(await foodCenterService.getFoodCenterById(req.params.id));
         } catch (e) {
             res.statusCode = 500;
             res.send(new ErrorResponse(500, e.message));

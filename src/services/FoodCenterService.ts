@@ -2,6 +2,7 @@ import { Repository, getRepository, UpdateResult, getMongoRepository, MongoRepos
 import { FoodCenter } from "../entity/FoodCenter";
 import { FCStatus } from "../entity/FCStatus";
 import { User } from "../entity/User";
+const ObjectId = require('mongodb').ObjectId;
 export class FoodCenterSearch {
     q?: string;
     lat?: string;
@@ -32,10 +33,6 @@ export class FoodCenterService {
         return this.foodCenterRepository.find({ "user": user });
     }
 
-    getById(id: string): Promise<FoodCenter> {
-        let query: any = { "id": id };
-        return this.foodCenterRepository.findOne(query);
-    }
 
     formQueryAggregationOptions(search: FoodCenterSearch): any {
         let radiusInMeters = Number(search.radius ? search.radius : 5) * 1000;
@@ -118,9 +115,9 @@ export class FoodCenterService {
     }
 
     getFoodCenterById(id: string): Promise<FoodCenter> {
-        return this.foodCenterRepository.findOne({
+        return this.foodCenterRepository.findOneOrFail({
             where: {
-                id: id
+                _id: new ObjectId(id)
             }
         });
     }
