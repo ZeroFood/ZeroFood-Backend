@@ -19,6 +19,7 @@ export class FoodCenterService {
     }
 
     async getAll(search: FoodCenterSearch): Promise<FoodCenter[]> {
+        console.log(search);
         if (search.lat && search.long) {
             let queryAggregationOptions = this.formQueryAggregationOptions(search);
             return this.foodCenterRepository.aggregate(queryAggregationOptions).toArray();
@@ -47,6 +48,14 @@ export class FoodCenterService {
         if (search.status) {
             let statusArr = search.status.split(",");
             queryFilter.status["$in"] = statusArr;
+        }
+
+        // Corner case: If the query is three step (ex: city, state, country),
+        // then we increase the radius to 50kms.
+        if (search.q) {
+            const step = search.q.split(",").length;
+            if (step === 3)
+                radiusInMeters = 50 * 1000;
         }
 
         let query: any = [{
