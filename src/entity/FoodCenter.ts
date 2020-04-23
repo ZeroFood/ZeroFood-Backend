@@ -13,6 +13,11 @@ export class Timings {
     dinner?: Time;
 }
 
+export class Distance {
+    calculated: Double;
+    location: Location;
+}
+
 @Entity()
 export class FoodCenter {
 
@@ -65,5 +70,7 @@ export class FoodCenter {
     @CreateDateColumn()
     updatedDate: Date;
 
+    @Column("simple-json")
+    dist: Distance;
 
 }

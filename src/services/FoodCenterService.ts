@@ -22,7 +22,7 @@ export class FoodCenterService {
         console.log(search);
         if (search.lat && search.long) {
             let queryAggregationOptions = this.formQueryAggregationOptions(search);
-            return this.foodCenterRepository.aggregate(queryAggregationOptions).toArray();
+            return this.foodCenterRepository.aggregateEntity(queryAggregationOptions).toArray();
         } else {
             let queryOptions = this.formQueryOptions(search);
             return this.foodCenterRepository.find(queryOptions);
