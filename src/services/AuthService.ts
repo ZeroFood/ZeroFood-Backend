@@ -29,11 +29,11 @@ export class AuthService {
     }
 
     generateToken(user: User): AuthToken {
-        var token = jwt.sign(Object.assign({}, user), 'shhhhh', { expiresIn: '1h' });
+        var token = jwt.sign(Object.assign({}, user), 'shhhhh', { expiresIn: '22h' });
 
         return {
             token: token,
-            expiry: 3600,
+            expiry: 3600 * 22,
             user: user
         };
     }
