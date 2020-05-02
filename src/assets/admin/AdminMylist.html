@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>COVID FOOD - List of Free Food Centers Across India</title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+
+    <link rel="stylesheet" href="https://zerofood.in/themes/gama/assets/special/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://zerofood.in/themes/gama/assets/special/css/custom.css" />
+    <link rel="stylesheet" href="https://zerofood.in/themes/gama/assets/special/css/ionicons.min.css" />
+    <link rel="stylesheet" href="https://zerofood.in/themes/gama/assets/special/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://zerofood.in/themes/gama/assets/special/css/pace.css" />
+
+
+    <!-- js -->
+
+
+
+    <script type="application/x-javascript"
+        src="https://zerofood.in/themes/gama/assets/js/library/jquery-1.11.min.js"></script>
+    <script type="text/javascript" src="https://zerofood.in/themes/gama/assets/special/js/modernizr.custom.js"></script>
+    <script type="text/javascript" src="https://zerofood.in/themes/gama/assets/special/js/pace.min.js"></script>
+    <script type="text/javascript"
+        src="https://zerofood.in/themes/gama/assets/js/bootstrap-material-datetimepicker.js"></script>
+    <script type="text/javascript" src="https://zerofood.in/themes/gama/assets/special/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+    <style>
+        .fc_option_dropdown li {
+            padding: 6px;
+            cursor: pointer;
+        }
+
+        .fc_option_dropdown li:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+
+</head>
+
+<body id="page">
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="index.html"><b>ZERO</b> FOOD </a></h1>
+                        <small style="float: left;">I am Ramesh</small>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="cl-effect-11"><a href="Create.html" data-hover="Create">Create</a></li>
+                                <li class="cl-effect-11"><a href="AdminMylist.html" data-hover="Mylist">Mylist</a></li>
+                                <li class="cl-effect-10"><a href="Logout.html" data-hover="Logout">Logout</a></li>
+
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </nav>
+        </header>
+    </div>
+
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-8 col-xs-offset-2" style="margin-bottom: 20px;">
+                <form role="search" class="search_form">
+                    <div class="input-group">
+                        <input type="text" class="form-control search" placeholder="Search and hit enter"
+                            aria-label="...">
+                        <div class="input-group-btn">
+                            <button type="button" class="search_filter_dropdown btn btn-success dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Unlisted <span
+                                    class="caret"></span></button>
+                            <ul class="dropdown-menu dropdown-menu-right search_filter_options">
+                                <!-- <li><a href="#">Author</a></li> -->
+                                <!-- <li><a href="#">City</a></li> -->
+                                <!-- <li><a href="#">State</a></li> -->
+                                <!-- <li><a href="#">Pending</a></li> -->
+                                <li><a href="#">Unlisted</a></li>
+                                <li><a href="#">Listed</a></li>
+                                <li><a href="#">Deleted</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row align-items-center" style="margin-bottom: 2rem;">
+            <div class="table-responsive">
+                <span style="margin: 4rem;">
+                    <h3>List of Entries - Pending Approval</h3>
+                </span>
+                <table class="table table-hover" id="search_table" data-page-length='50'>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Place name</th>
+                            <th scope="col">State</th>
+                            <th scope="col">City/District</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Timing</th>
+                            <th scope="col">Capacity</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <script id="hidden-template" type="text/x-custom-template">
+                        <tr>
+                            <th scope="row">1</th>
+                            <!-- <td>Rajesh Kumar <small>9XXXXXXXX</small></td>
+                            <td>Annapurna Gachibowli Center</td>
+                            <td>Telangana</td>
+                            <td>Hyderbad</td>
+                            <td>Rd no.45, Beside, Hotel
+                                Krishna, 50045</td>
+                            <td>Lunch: <small>8am–4pm</small><br>
+                                Dinner: <small>6pm–11pm</small> </td>
+                            <td>100 people</td>
+                            <td>9XXXXXXXXXX</td>
+                            <td> <button type="button" class="btn btn-indigo btn-sm m-0">View in Map</button></td>
+                            <td>
+                                <center>
+                                    <div class="btn-group ">
+                                        <button type="button" class="btn btn-danger dropdown-toggle "
+                                            data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                            <li><a href="Edit.html">Edit</a></li>
+                                            <li><a href="#">Approved</a></li>
+                                            <li><a href="#">Unlist</a></li>
+                                            <li><a href="#">Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </center>
+                            </td> -- >
+                        </tr>
+                        </script> -->
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Mobile Menu -->
+    <div class="overlay overlay-hugeinc">
+        <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+        <nav>
+            <ul>
+                <li><a href="Create.html">Create</a></li>
+                <li><a href="AdminMylist.html">MyList</a></li>
+                <li><a href="Logout.html">Log out</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+
+
+<div class="footer">
+    <footer id="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <p class="copyright">A community effort By Anonymous Citizens</p>
+
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+</html>
