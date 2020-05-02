@@ -2,6 +2,7 @@ $(document).ready(function () {
     var table = $('#search_table').DataTable();
     var token = {};
     var selectedFilter = "Unlisted";
+    var users;
     $(".search_form").submit((event) => {
         console.log(event);
         event.preventDefault();
@@ -28,7 +29,7 @@ $(document).ready(function () {
         }
         var cnf = window.confirm("Are you want to change the status to " + status);
         if (cnf) {
-            updateStatus({ id: "5eacae9532b3a4001189e8fc", status: status }).then(() => {
+            updateStatus({ id: id, status: status }).then(() => {
                 fetchFC().then(res => updateTable(res));
             });
         }
@@ -40,7 +41,7 @@ $(document).ready(function () {
             responseData.forEach(element => {
                 var a = [];
                 a.push(arr.length + 1);
-                a.push(element.user.id);
+                a.push(users[element.user.id].fullName);
                 a.push(element.name ? element.name : "-");
                 a.push(element.state ? element.state : "-");
                 a.push(element.city ? element.city : "-");
@@ -75,9 +76,11 @@ $(document).ready(function () {
             });
             return arr;
         }
-        console.log(toDataTable(res));
-        table.clear();
-        table.rows.add(toDataTable(res)).draw();
+        fetchUsers().then(() => {
+            console.log(toDataTable(res));
+            table.clear();
+            table.rows.add(toDataTable(res)).draw();
+        });
     }
 
     function login() {
@@ -136,6 +139,32 @@ $(document).ready(function () {
             $.ajax(settings).done(function (response) {
                 console.log(response);
                 resolve(response);
+            });
+        });
+    }
+
+    function fetchUsers() {
+        if (users) {
+            return Promise.resolve(users);
+        }
+        var settings = {
+            "url": "http://3.16.206.55:3000/api/users/",
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token.token
+            }
+        };
+
+        return new Promise((resolve, reject) => {
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                users = {};
+                response.forEach(user => {
+                    users[user.id] = user;
+                });
+                resolve(users);
             });
         });
     }
