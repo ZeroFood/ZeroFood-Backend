@@ -30,6 +30,7 @@
     "apidoc": "^0.20.1",
     "csv-parser": "^2.3.2",
     "nodemon": "^2.0.2",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.3.3333"
   },
   "dependencies": {
@@ -46,7 +47,8 @@
     "typeorm": "^0.2.0"
   },
   "scripts": {
-    "start": "tsc && node src/index.js"
+    "start": "tsc && node src/index.js",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "nodemonConfig": {
     "ignore": [

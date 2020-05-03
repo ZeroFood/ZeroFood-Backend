@@ -7,6 +7,7 @@ COPY tsconfig.json .
 COPY src src/
 
 RUN npm install -g typescript
+RUN npm install -g ts-node
 RUN npm install -g apidoc
 
 RUN npm install
